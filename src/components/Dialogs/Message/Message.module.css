@@ -1,3 +1,35 @@
-.messages {
+/* .message {
+  margin: 30px;
+}
+
+.messageItem {
+  background-color: rgb(200, 200, 200);
+  display: inline;
+  border-radius:10px;
   padding: 10px;
+}
+
+.me {
+  background-color: red;
+  
+} */
+
+
+.message {
+  margin: 30px;
+}
+
+.messageItem {
+  background-color: rgb(200, 200, 200);
+  display: inline;
+  border-radius:10px;
+  padding: 10px;
+}
+
+.me {
+  text-align: right;
+}
+
+.meItem {
+  background-color: rgb(252, 67, 67);
 }
