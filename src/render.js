@@ -4,12 +4,12 @@ import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 
-export let rerenderEntireTree = (state, addPost) => {
-  const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root'));
 
+export let rerenderEntireTree = (state, addPost, updateNewPostText) => {
   root.render(
     <BrowserRouter>
-      <App state={state} addPost={addPost} />
+      <App state={state} addPost={addPost} updateNewPostText={updateNewPostText} />
     </BrowserRouter>
   );
 }
