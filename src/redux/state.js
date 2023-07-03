@@ -1,3 +1,5 @@
+import { rerenderEntireTree } from "../render";
+
 let state = {
   profilePage: {
     postsData: [
@@ -43,6 +45,16 @@ let state = {
       { id: 6, name: 'Soma', avatar: 'https://2d889e898956dc8bad12-3c6fa761318b1fa796d8f54fe7f877f1.ssl.cf1.rackcdn.com/56146580.jpg' },
     ]
   }
+}
+
+export let addPost = (postMessage) => {
+  let newPost = {
+    id: 1 + state.profilePage.postsData.map(post => post.id).at(-1),
+    message: postMessage,
+    likesCount: 0
+  };
+  state.profilePage.postsData.push(newPost);
+  rerenderEntireTree(state, addPost);
 }
 
 export default state;
