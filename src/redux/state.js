@@ -33,7 +33,7 @@ let store = {
         { id: 9, text: 'Да', sender: 0 },
         { id: 10, text: 'Нет', sender: 1 },
         { id: 11, text: 'ОК.', sender: 0 },
-  
+
       ]
     },
     navbarPage: {
@@ -49,25 +49,35 @@ let store = {
   getState() {
     return this._state;
   },
+  subscribe(observer) {
+    this._callSubscriber = observer;
+  },
   _callSubscriber() {
     console.log('State was changed')
   },
-  addPost() {
-    let newPost = {
-      id: 1 + this._state.profilePage.postsData.map(post => post.id).at(-1),
-      message: this._state.profilePage.newPostText,
-      likesCount: 0
-    };
-    this._state.profilePage.postsData.push(newPost);
-    this._state.profilePage.newPostText = '';
-    this._callSubscriber(this._state);
-  },
-  updateNewPostText(newText) {
-    this._state.profilePage.newPostText = newText;
-    this._callSubscriber(this._state);
-  },
-  subscribe(observer) {
-    this._callSubscriber = observer;
+  dispatch(action) {
+    switch (action.type) {
+      case 'ADD-POST': {
+        let newPost = {
+          id: 1 + this._state.profilePage.postsData.map(post => post.id).at(-1),
+          message: this._state.profilePage.newPostText,
+          likesCount: 0
+        };
+        this._state.profilePage.postsData.push(newPost);
+        this._state.profilePage.newPostText = '';
+        this._callSubscriber(this._state);
+        break;
+      }
+      case 'UPDATE-NEW-POST-TEXT': {
+        this._state.profilePage.newPostText = action.newText;
+        this._callSubscriber(this._state);
+        break;
+      }
+      default: {
+        console.log('Something wrong!')
+        break;
+      }
+    }
   }
 }
 
