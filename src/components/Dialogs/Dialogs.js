@@ -6,11 +6,8 @@ import { addMessageActionCreator, updateNewMessageTextActionCreator } from '../.
 
 
 const Dialogs = (props) => {
-
-  let newMessageElement = React.createRef();
-
-  let updateTextArea = () => {
-    let messageText = newMessageElement.current.value;
+  let updateTextArea = (e) => {
+    let messageText = e.target.value;
     props.dispatch(updateNewMessageTextActionCreator(messageText))
   }
 
@@ -31,7 +28,7 @@ const Dialogs = (props) => {
         )}
         <div className={styles.forms}>
           <div>
-            <textarea onChange={updateTextArea} ref={newMessageElement} value={props.state.newMessageText}></textarea>
+            <textarea onChange={updateTextArea} value={props.state.newMessageText}></textarea>
           </div>
           <div>
             <button onClick={sendMessage}>Send</button>
