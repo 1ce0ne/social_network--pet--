@@ -1,3 +1,7 @@
+import messagesReducer from "./messagesReducer";
+import navbarReducer from "./navbarReducer";
+import profileReducer from "./profileReducer";
+
 let store = {
   _state: {
     profilePage: {
@@ -56,71 +60,12 @@ let store = {
     console.log('State was changed')
   },
   dispatch(action) {
-    switch (action.type) {
-      case ADD_POST: {
-        let newPost = {
-          id: 1 + this._state.profilePage.postsData.map(post => post.id).at(-1),
-          message: this._state.profilePage.newPostText,
-          likesCount: 0
-        };
-        this._state.profilePage.postsData.push(newPost);
-        this._state.profilePage.newPostText = '';
-        this._callSubscriber(this._state);
-        break;
-      }
-      case UPDATE_NEW_POST_TEXT: {
-        this._state.profilePage.newPostText = action.newText;
-        this._callSubscriber(this._state);
-        break;
-      }
-      case ADD_MESSAGE: {
-        let newMessage = {
-          id: 1 + this._state.messagesPage.messagesData.map(message => message.id).at(-1),
-          text: this._state.messagesPage.newMessageText,
-          sender: 0
-        };
-        if(newMessage.text !== '') {
-          this._state.messagesPage.messagesData.push(newMessage);
-          this._state.messagesPage.newMessageText = '';
-          this._callSubscriber(this._state);
-        }
-        break;
-      }
-      case UPDATE_NEW_MESSAGE_TEXT: {
-        this._state.messagesPage.newMessageText = action.newMessage;
-        this._callSubscriber(this._state);
-        break;
-      }
-      default: {
-        console.log('Something wrong!')
-        break;
-      }
-    }
+    this._state.profilePage = profileReducer(this._state.profilePage, action);
+    this._state.messagesPage = messagesReducer(this._state.messagesPage, action);
+    this._state.navbarPage = navbarReducer(this._state.navbarPage, action);
+    this._callSubscriber(this._state);
   }
 }
 
 export default store;
 window.store = store;
-
-// Action Types:
-const ADD_POST = 'ADD-POST'
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
-const ADD_MESSAGE = 'ADD-MESSAGE'
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
-
-// Action Creators:
-export const addPostActionCreator = () => ({ type: ADD_POST })
-
-export const updateNewPostTextActionCreator = (text) => {
-  return {
-    type: UPDATE_NEW_POST_TEXT, 
-    newText: text
-  }
-}
-
-export const addMessageActionCreator = () => ({type: ADD_MESSAGE})
-
-export const updateNewMessageTextActionCreator = (text) => ({
-  type: UPDATE_NEW_MESSAGE_TEXT,
-  newMessage: text
-})
