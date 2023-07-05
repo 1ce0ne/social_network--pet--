@@ -33,8 +33,8 @@ let store = {
         { id: 9, text: 'Да', sender: 0 },
         { id: 10, text: 'Нет', sender: 1 },
         { id: 11, text: 'ОК.', sender: 0 },
-
-      ]
+      ],
+      newMessageText: ''
     },
     navbarPage: {
       friendsData: [
@@ -73,6 +73,24 @@ let store = {
         this._callSubscriber(this._state);
         break;
       }
+      case ADD_MESSAGE: {
+        let newMessage = {
+          id: 1 + this._state.messagesPage.messagesData.map(message => message.id).at(-1),
+          text: this._state.messagesPage.newMessageText,
+          sender: 0
+        };
+        if(newMessage.text !== '') {
+          this._state.messagesPage.messagesData.push(newMessage);
+          this._state.messagesPage.newMessageText = '';
+          this._callSubscriber(this._state);
+        }
+        break;
+      }
+      case UPDATE_NEW_MESSAGE_TEXT: {
+        this._state.messagesPage.newMessageText = action.newMessage;
+        this._callSubscriber(this._state);
+        break;
+      }
       default: {
         console.log('Something wrong!')
         break;
@@ -87,6 +105,8 @@ window.store = store;
 // Action Types:
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+const ADD_MESSAGE = 'ADD-MESSAGE'
+const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
 
 // Action Creators:
 export const addPostActionCreator = () => ({ type: ADD_POST })
@@ -97,3 +117,10 @@ export const updateNewPostTextActionCreator = (text) => {
     newText: text
   }
 }
+
+export const addMessageActionCreator = () => ({type: ADD_MESSAGE})
+
+export const updateNewMessageTextActionCreator = (text) => ({
+  type: UPDATE_NEW_MESSAGE_TEXT,
+  newMessage: text
+})
