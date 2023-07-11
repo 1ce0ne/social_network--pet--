@@ -42,7 +42,7 @@ const messagesReducer = (state = initialState, action) => {
         stateCopy.messagesData.push(newMessage);
         stateCopy.newMessageText = '';
       }
-      return stateCopy;
+      return stateCopy; 
     }
     case UPDATE_NEW_MESSAGE_TEXT: {
       return {
