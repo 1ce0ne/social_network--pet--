@@ -3,7 +3,6 @@ import Post from './Post/Post';
 import React from 'react';
 
 const MyPosts = (props) => {
-  debugger
   let newPostElement = React.createRef();
 
   let onAddPost = () => {
@@ -28,7 +27,7 @@ const MyPosts = (props) => {
       </div>
       <div className={styles.posts}>
         {props.profilePage.postsData.map(post =>
-          <Post message={post.message} likesCount={post.likesCount} />
+          <Post key={post.id} message={post.message} likesCount={post.likesCount} />
         )}
       </div>
     </div>

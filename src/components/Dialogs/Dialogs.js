@@ -16,12 +16,12 @@ const Dialogs = (props) => {
     <div className={styles.dialogs}>
       <div className={styles.dialogsItems}>
         {props.messagesPage.dialogsData.map(dialog =>
-          <DialogItem name={dialog.name} id={dialog.id} avatar={dialog.avatar} />
+          <DialogItem key={dialog.id} name={dialog.name} id={dialog.id} avatar={dialog.avatar} />
         )}
       </div>
       <div className={styles.messages}>
         {props.messagesPage.messagesData.map(message =>
-          <Message text={message.text} id={message.id} sender={message.sender} />
+          <Message key={message.id} text={message.text} id={message.id} sender={message.sender} />
         )}
         <div className={styles.forms}>
           <div>

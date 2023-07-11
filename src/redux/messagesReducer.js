@@ -34,8 +34,10 @@ const messagesReducer = (state = initialState, action) => {
         text: state.newMessageText,
         sender: 0
       };
-      let stateCopy = {...state};
-      stateCopy.messagesData = [...state.messagesData]
+      let stateCopy = {
+        ...state,
+        messagesData: [...state.messagesData]
+      };
       if (newMessage.text !== '') {
         stateCopy.messagesData.push(newMessage);
         stateCopy.newMessageText = '';
@@ -43,9 +45,10 @@ const messagesReducer = (state = initialState, action) => {
       return stateCopy;
     }
     case UPDATE_NEW_MESSAGE_TEXT: {
-      let stateCopy = {...state};
-      stateCopy.newMessageText = action.newMessage;
-      return stateCopy;
+      return {
+        ...state,
+        newMessageText: action.newMessage
+      };
     }
     default:
       return state;
