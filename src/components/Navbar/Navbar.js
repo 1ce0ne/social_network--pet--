@@ -24,7 +24,7 @@ const Navbar = (props) => {
       </div>
       <br />
       <h3 className={styles.h3}>Friends online</h3>
-      {props.state.friendsData.map(friend => <Friend key={friend.id} name={friend.name} avatar={friend.avatar} />)}
+      {props.navbarPage.friendsData.map(friend => <Friend key={friend.id} name={friend.name} avatar={friend.avatar} />)}
 
     </nav>
   )
