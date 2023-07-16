@@ -1,21 +1,22 @@
 import styles from './Users.module.css'
+import axios from 'axios';
+import userPhoto from '../../../src/assets/images/user.png'
+
 
 const Users = (props) => {
-
-  if (props.users.length === 0) {
-    props.setUsers([
-      { id: 1, photoUrl: 'https://gas-kvas.com/uploads/posts/2023-02/1675266617_gas-kvas-com-p-saske-uchikha-art-risunok-2.jpg', followed: false, fullName: 'Саске Учиха', status: 'Не вернусь в Коноху!', location: { city: 'Коноха', country: 'Страна Огня' } },
-      { id: 2, photoUrl: 'https://fikiwiki.com/uploads/posts/2022-02/1645027584_5-fikiwiki-com-p-kartinki-naruto-na-avu-5.jpg', followed: true, fullName: 'Наруто Узумаки', status: 'Саске, вернусь в Коноху!', location: { city: 'Коноха', country: 'Страна Огня' } },
-      { id: 3, photoUrl: 'https://cm.author.today/content/2023/01/26/574c3f14027048dbbff6dec0bc2142d0.jpg', followed: true, fullName: 'Хината Хьюго', status: 'Люблю Наруто', location: { city: 'Коноха', country: 'Страна Огня' } },
-    ])
+  let getUsers = ()=> {
+    axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+      props.setUsers(response.data.items);
+    });
   }
 
   return (
     <div>
+      <button onClick={getUsers}>Получить пользователей</button>
       {props.users.map(user => <div key={user.id}>
         <span>
           <div>
-            <img src={user.photoUrl} alt="UserPhoto" className={styles.photo} />
+            <img src={user.photos.small != null ? user.photos.small : userPhoto} alt="UserPhoto" className={styles.photo} />
           </div>
           <div>
             {user.followed
@@ -26,12 +27,12 @@ const Users = (props) => {
         </span>
         <span>
           <span>
-            <div>{user.fullName}</div>
+            <div>{user.name}</div>
             <div>{user.status}</div>
           </span>
           <span>
-            <div>{user.location.country}</div>
-            <div>{user.location.city}</div>
+            <div>{"user.location.country"}</div>
+            <div>{"user.location.city"}</div>
           </span>
         </span>
       </div>)}
