@@ -1,5 +1,5 @@
 import styles from './Users.module.css'
-import userPhoto from '../../../src/assets/images/user.png'
+import userPhoto from '../../../src/assets/images/user.jpg'
 import { NavLink } from 'react-router-dom';
 
 const Users = (props) => {
