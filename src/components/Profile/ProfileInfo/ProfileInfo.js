@@ -1,15 +1,19 @@
+import Preloader from '../../common/Preloader/Preloader';
 import styles from './ProfileInfo.module.css';
+import userPhoto from '../../../../src/assets/images/user.jpg'
 
 const ProfileInfo = (props) => {
+  if (!props.profile) {
+    return <Preloader />
+  }
+
   return (
     <div>
-      <div>
-        <img alt='wallpaper' className={styles.wallpaper} src='https://sun9-54.userapi.com/impg/knzFtHW0XBZ6CF5oCGuRInAsP-2kNSgn3dNQfg/nWTIPRJvj_o.jpg?size=2560x731&quality=96&sign=ae5f1235e4a332626d43852b00dd1447&c_uniq_tag=0TAZ1eGwPNslS8vvCNms1l4HPz9wKat5BtP8n25aZ4Q&type=album'></img>
-      </div>
-
       <div className={styles.descriptionBlock} >
-        Ava + description
-        {/* <img alt='Avatar' src='https://ae04.alicdn.com/kf/Sa27b6769d1464cd7871a425d8b8c2e34S.jpg'></img> */}
+        <img className={styles.userPhoto} 
+             src={props.profile.photos.large == null ? userPhoto : props.profile.photos.large} />
+        <h1>{props.profile.fullName}</h1>
+        <p>{props.profile.aboutMe}</p>
       </div>
     </div>
   )
