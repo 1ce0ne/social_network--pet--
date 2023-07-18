@@ -7,3 +7,12 @@
   height: 60px;
   margin-left: 10px;
 }
+
+.loginBlock {
+  float: right;
+  color: white;
+}
+
+.loginBlock a {
+  color: white;
+}
