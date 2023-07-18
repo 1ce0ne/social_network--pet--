@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { followAC, setCurrentPageAC, setUsersAC, unfollowAC, setTotalUsersCountAC, setIsFetchingAC } from '../../redux/usersReducer';
+import { follow, setCurrentPage, setUsers, unfollow, setTotalUsersCount, toggleIsFetching } from '../../redux/usersReducer';
 import React from 'react';
 import axios from 'axios';
 import Users from './Users'
@@ -53,19 +53,8 @@ let mapStateToProps = (state) => {
     totalUsersCount: state.usersPage.totalUsersCount,
     currentPage: state.usersPage.currentPage,
     isFetching: state.usersPage.isFetching
-  }
-}
-
-let mapDispatchToProps = (dispatch) => {
-  return {
-    follow: (userId) => {dispatch(followAC(userId))},
-    unfollow: (userId) => {dispatch(unfollowAC(userId))},
-    setUsers: (users) => {dispatch(setUsersAC(users))},
-    setCurrentPage: (currentPage) => {dispatch(setCurrentPageAC(currentPage))},
-    setTotalUsersCount: (totalCount) => {dispatch(setTotalUsersCountAC(totalCount))},
-    toggleIsFetching: (isFetching) => {dispatch(setIsFetchingAC(isFetching))}
-  }
+  } 
 }
 
 // Контейнерная компонента, которая работает со store
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer); 
+export default connect(mapStateToProps, {follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching})(UsersContainer); 
