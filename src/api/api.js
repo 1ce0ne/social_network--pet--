@@ -15,13 +15,13 @@ export const usersAPI = {
         return response.data;
       });
   },
-  unfollowUser(userId) {
+  unfollow(userId) {
     return instance.delete(`follow/${userId}`)
       .then(response => {
         return response.data;
       })
   },
-  followUser(userId) {
+  follow(userId) {
     return instance.post(`follow/${userId}`, {})
       .then(response => {
         return response.data;
@@ -36,7 +36,7 @@ export const usersAPI = {
 }
 
 export const authAPI = {
-  isAuth() {
+  me() {
     return instance.get(`auth/me/`)
       .then(response => {
         return response.data;

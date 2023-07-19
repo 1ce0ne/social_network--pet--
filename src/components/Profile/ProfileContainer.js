@@ -1,12 +1,10 @@
 import React from 'react';
 import Profile from './Profile';
-import axios from 'axios';
 import { connect } from 'react-redux';
-import { setUserProfile } from '../../redux/profileReducer';
+import { getUserProfile } from '../../redux/profileReducer';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { usersAPI } from '../../api/api';
 
-// а) Контейнерная компонента для AJAX запросов
+// а) Контейнерная компонента для AJAX запросов (через Thunk)
 class ProfileContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -15,12 +13,9 @@ class ProfileContainer extends React.Component {
   componentDidMount() {
     let userId = this.props.router.params.userId;
     if (!userId) {
-      userId = 2;
+      userId = 29612;
     }
-    usersAPI.getUserProfile(userId)
-      .then(data => {
-        this.props.setUserProfile(data);
-      }) 
+    this.props.getUserProfile(userId);
   }
 
   render() {
@@ -53,4 +48,4 @@ let mapStateToProps = (state) => ({
   profile: state.profilePage.profile
 })
 
-export default connect(mapStateToProps, {setUserProfile})(WithUrlDataContainerComponent);
+export default connect(mapStateToProps, { getUserProfile })(WithUrlDataContainerComponent);
