@@ -19,9 +19,7 @@ class ProfileContainer extends React.Component {
   }
 
   render() {
-    return(
-      <Profile {...this.props} profile={this.props.profile} />
-    )
+    return <Profile {...this.props} profile={this.props.profile} />;
   }
 }
 
@@ -32,20 +30,17 @@ function withRouter(Component) {
     let location = useLocation();
     let navigate = useNavigate();
     let params = useParams();
-    return (
-      <Component
-        {...props}
-        router={{ location, navigate, params }}
-      />
-    );
+    return <Component {...props} router={{ location, navigate, params }} />;
   }
   return ComponentWithRouterProp;
 }
 let WithUrlDataContainerComponent = withRouter(ProfileContainer);
 
-// в) Контейнерная компонента для получения state и dispatch 
+// в) Контейнерная компонента для получения state и dispatch
 let mapStateToProps = (state) => ({
-  profile: state.profilePage.profile
-})
+  profile: state.profilePage.profile,
+});
 
-export default connect(mapStateToProps, { getUserProfile })(WithUrlDataContainerComponent);
+export default connect(mapStateToProps, { getUserProfile })(
+  WithUrlDataContainerComponent
+);

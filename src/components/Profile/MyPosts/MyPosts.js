@@ -7,31 +7,39 @@ const MyPosts = (props) => {
 
   let onAddPost = () => {
     props.addPost();
-  }
+  };
 
   let onPostChange = () => {
     let text = newPostElement.current.value;
     props.updateNewPostText(text);
-  }
+  };
 
   return (
     <div className={styles.postsBlock}>
       <h3>My posts:</h3>
       <div>
         <div>
-          <textarea ref={newPostElement} onChange={onPostChange} value={props.profilePage.newPostText} />
+          <textarea
+            ref={newPostElement}
+            onChange={onPostChange}
+            value={props.profilePage.newPostText}
+          />
         </div>
         <div>
           <button onClick={onAddPost}>Add post</button>
         </div>
       </div>
       <div className={styles.posts}>
-        {props.profilePage.postsData.map(post =>
-          <Post key={post.id} message={post.message} likesCount={post.likesCount} />
-        )}
+        {props.profilePage.postsData.map((post) => (
+          <Post
+            key={post.id}
+            message={post.message}
+            likesCount={post.likesCount}
+          />
+        ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default MyPosts;

@@ -6,26 +6,39 @@ const Dialogs = (props) => {
   let updateTextArea = (e) => {
     let messageText = e.target.value;
     props.updateTextArea(messageText);
-  }
+  };
 
   let sendMessage = () => {
     props.sendMessage();
-  }
+  };
 
   return (
     <div className={styles.dialogs}>
       <div className={styles.dialogsItems}>
-        {props.messagesPage.dialogsData.map(dialog =>
-          <DialogItem key={dialog.id} name={dialog.name} id={dialog.id} avatar={dialog.avatar} />
-        )}
+        {props.messagesPage.dialogsData.map((dialog) => (
+          <DialogItem
+            key={dialog.id}
+            name={dialog.name}
+            id={dialog.id}
+            avatar={dialog.avatar}
+          />
+        ))}
       </div>
       <div className={styles.messages}>
-        {props.messagesPage.messagesData.map(message =>
-          <Message key={message.id} text={message.text} id={message.id} sender={message.sender} />
-        )}
+        {props.messagesPage.messagesData.map((message) => (
+          <Message
+            key={message.id}
+            text={message.text}
+            id={message.id}
+            sender={message.sender}
+          />
+        ))}
         <div className={styles.forms}>
           <div>
-            <textarea onChange={updateTextArea} value={props.messagesPage.newMessageText}></textarea>
+            <textarea
+              onChange={updateTextArea}
+              value={props.messagesPage.newMessageText}
+            ></textarea>
           </div>
           <div>
             <button onClick={sendMessage}>Send</button>
@@ -33,7 +46,7 @@ const Dialogs = (props) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Dialogs;

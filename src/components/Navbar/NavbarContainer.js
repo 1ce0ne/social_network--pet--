@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 
 let mapStateToProps = (state) => {
   return {
-    navbarPage: state.navbarPage
-  }
-}
+    navbarPage: state.navbarPage,
+  };
+};
 
 let mapDispatchToProps = (dispatch) => {
-  return {}
-}
+  return {};
+};
 
 const NavbarContainer = connect(mapStateToProps, mapDispatchToProps)(Navbar);
 
