@@ -10,7 +10,6 @@ const Users = (props) => {
     // Заглушка
     if (i < 25) pages.push(i);
   }
-
   return (
     <div>
       <div>
@@ -21,6 +20,7 @@ const Users = (props) => {
               className={props.currentPage === p ? styles.selectedPage : ''}
               onClick={(e) => {
                 props.onPageChanged(p);
+                props.setCurrentPage(p);
               }}
             >
               {p + ' '}
@@ -35,9 +35,7 @@ const Users = (props) => {
             <div>
               <NavLink to={'/profile/' + user.id}>
                 <img
-                  src={
-                    user.photos.small != null ? user.photos.small : userPhoto
-                  }
+                  src={user.photos.small != null ? user.photos.small : userPhoto}
                   alt='UserPhoto'
                   className={styles.photo}
                 />
@@ -46,9 +44,7 @@ const Users = (props) => {
             <div>
               {user.followed ? (
                 <button
-                  disabled={props.followingInProgress.some(
-                    (id) => id === user.id
-                  )}
+                  disabled={props.followingInProgress.some((id) => id === user.id)}
                   onClick={() => {
                     props.unfollow(user.id);
                   }}
@@ -57,9 +53,7 @@ const Users = (props) => {
                 </button>
               ) : (
                 <button
-                  disabled={props.followingInProgress.some(
-                    (id) => id === user.id
-                  )}
+                  disabled={props.followingInProgress.some((id) => id === user.id)}
                   onClick={() => {
                     props.follow(user.id);
                   }}

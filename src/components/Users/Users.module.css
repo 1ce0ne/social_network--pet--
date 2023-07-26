@@ -11,4 +11,5 @@
 
 .selectedPage {
   font-weight: bold;
+  color: red;
 }
