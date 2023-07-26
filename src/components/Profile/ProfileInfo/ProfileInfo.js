@@ -18,9 +18,8 @@ const ProfileInfo = (props) => {
           }
           alt='UserPhoto'
         />
-        <ProfileStatus status={'Hello'} />
         <h1>{props.profile.fullName}</h1>
-        <p>{props.profile.aboutMe}</p>
+        <ProfileStatus status={props.status} updateStatus={props.updateStatus} />
       </div>
     </div>
   );
