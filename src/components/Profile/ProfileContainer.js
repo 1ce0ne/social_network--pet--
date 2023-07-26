@@ -3,13 +3,10 @@ import Profile from './Profile';
 import { connect } from 'react-redux';
 import { getUserProfile } from '../../redux/profileReducer';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
+import { compose } from 'redux';
 
-// а) Контейнерная компонента для AJAX запросов (через Thunk)
 class ProfileContainer extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     let userId = this.props.router.params.userId;
     if (!userId) {
@@ -23,8 +20,6 @@ class ProfileContainer extends React.Component {
   }
 }
 
-// б) Контейнерная компонента для связи с url
-// Самописный withRouter (С версии React Router v6 применяются Хуки)
 function withRouter(Component) {
   function ComponentWithRouterProp(props) {
     let location = useLocation();
@@ -34,13 +29,13 @@ function withRouter(Component) {
   }
   return ComponentWithRouterProp;
 }
-let WithUrlDataContainerComponent = withRouter(ProfileContainer);
 
-// в) Контейнерная компонента для получения state и dispatch
 let mapStateToProps = (state) => ({
   profile: state.profilePage.profile,
 });
 
-export default connect(mapStateToProps, { getUserProfile })(
-  WithUrlDataContainerComponent
-);
+export default compose(
+  connect(mapStateToProps, { getUserProfile }),
+  withRouter,
+  withAuthRedirect
+)(ProfileContainer);
