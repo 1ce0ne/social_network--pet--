@@ -1,4 +1,4 @@
-const ADD_MESSAGE = 'ADD-MESSAGE';
+const ADD_MESSAGE = 'messagesPage/ADD-MESSAGE';
 
 let initialState = {
   dialogsData: [
@@ -54,7 +54,7 @@ let initialState = {
   ],
 };
 
-const messagesReducer = (state = initialState, action) => {
+const dialogsReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_MESSAGE: {
       let newMessage = {
@@ -81,4 +81,4 @@ export const addMessageActionCreator = (newMessageBody) => ({
   newMessageBody,
 });
 
-export default messagesReducer;
+export default dialogsReducer;
