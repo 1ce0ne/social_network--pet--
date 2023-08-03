@@ -3,7 +3,7 @@ import PostsReduxForm from './Form/PostsReduxForm';
 import Post from './Post/Post';
 import React from 'react';
 
-const MyPosts = (props) => {
+const MyPosts = React.memo((props) => {
   let addNewPost = (formData) => {
     props.addPost(formData.newPostText);
   };
@@ -21,6 +21,6 @@ const MyPosts = (props) => {
       </div>
     </div>
   );
-};
+});
 
 export default MyPosts;
