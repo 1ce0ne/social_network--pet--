@@ -8,8 +8,3 @@
 .photo:hover {
   border: 2px solid brown;
 }
-
-.selectedPage {
-  font-weight: bold;
-  color: red;
-}

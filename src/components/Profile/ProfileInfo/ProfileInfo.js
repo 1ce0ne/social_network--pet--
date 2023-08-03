@@ -3,8 +3,8 @@ import styles from './ProfileInfo.module.css';
 import userPhoto from '../../../../src/assets/images/user.jpg';
 import ProfileStatus from './ProfileStatus';
 
-const ProfileInfo = (props) => {
-  if (!props.profile) {
+const ProfileInfo = ({ profile, status, updateStatus }) => {
+  if (!profile) {
     return <Preloader />;
   }
 
@@ -13,13 +13,11 @@ const ProfileInfo = (props) => {
       <div className={styles.descriptionBlock}>
         <img
           className={styles.userPhoto}
-          src={
-            props.profile.photos.large == null ? userPhoto : props.profile.photos.large
-          }
+          src={profile.photos.large == null ? userPhoto : profile.photos.large}
           alt='UserPhoto'
         />
-        <h1>{props.profile.fullName}</h1>
-        <ProfileStatus status={props.status} updateStatus={props.updateStatus} />
+        <h1>{profile.fullName}</h1>
+        <ProfileStatus status={status} updateStatus={updateStatus} />
       </div>
     </div>
   );
