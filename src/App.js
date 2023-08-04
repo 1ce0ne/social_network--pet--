@@ -14,6 +14,9 @@ import { connect } from 'react-redux';
 import { initializeApp } from './redux/appReducer';
 import Preloader from './components/common/Preloader/Preloader';
 import { StrictMode } from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import store from './redux/redux-store';
+import { Provider } from 'react-redux';
 
 const App = (props) => {
   useEffect(() => {
@@ -23,24 +26,23 @@ const App = (props) => {
   if (!props.initialized) return <Preloader />;
   else
     return (
-      <StrictMode>
-        <div className='app-wrapper'>
-          <HeaderContainer />
-          <NavbarContainer />
-          <div className='app-wrapper-content'>
-            <Routes>
-              <Route path='/profile/:userId' element=<ProfileContainer /> />
-              <Route path='/profile' element=<ProfileContainer /> />
-              <Route path='/dialogs/*' element=<DialogsContainer /> />
-              <Route path='/users' element=<UsersContainer /> />
-              <Route path='/login' element=<Login /> />
-              <Route path='/news' element=<News /> />
-              <Route path='/music' element=<Music /> />
-              <Route path='/settings' element=<Settings /> />
-            </Routes>
-          </div>
+      <div className='app-wrapper'>
+        <HeaderContainer />
+        <NavbarContainer />
+        <div className='app-wrapper-content'>
+          <Routes>
+            <Route path='/profile/:userId' element=<ProfileContainer /> />
+            <Route path='/profile' element=<ProfileContainer /> />
+            <Route path='/dialogs/*' element=<DialogsContainer /> />
+            <Route path='/users' element=<UsersContainer /> />
+            <Route path='/login' element=<Login /> />
+            <Route path='/news' element=<News /> />
+            <Route path='/music' element=<Music /> />
+            <Route path='/settings' element=<Settings /> />
+          </Routes>
         </div>
-      </StrictMode>
+        <div>Learn React</div>
+      </div>
     );
 };
 
@@ -48,4 +50,18 @@ const mapStateToProps = (state) => ({
   initialized: state.app.initialized,
 });
 
-export default connect(mapStateToProps, { initializeApp })(App);
+const AppContainer = connect(mapStateToProps, { initializeApp })(App);
+
+const SocialNetworkApp = (props) => {
+  return (
+    <BrowserRouter>
+      <Provider store={store}>
+        <StrictMode>
+          <AppContainer />
+        </StrictMode>
+      </Provider>
+    </BrowserRouter>
+  );
+};
+
+export default SocialNetworkApp;
