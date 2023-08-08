@@ -7,9 +7,7 @@ const Navbar = (props) => {
     <nav className={styles.nav}>
       <div className={styles.item}>
         <NavLink
-          className={({ isActive }) =>
-            isActive ? styles.activeLink : undefined
-          }
+          className={({ isActive }) => (isActive ? styles.activeLink : undefined)}
           to='/profile'
         >
           Profile
@@ -17,9 +15,7 @@ const Navbar = (props) => {
       </div>
       <div className={styles.item}>
         <NavLink
-          className={({ isActive }) =>
-            isActive ? styles.activeLink : undefined
-          }
+          className={({ isActive }) => (isActive ? styles.activeLink : undefined)}
           to='/dialogs'
         >
           Messages
@@ -27,9 +23,7 @@ const Navbar = (props) => {
       </div>
       <div className={styles.item}>
         <NavLink
-          className={({ isActive }) =>
-            isActive ? styles.activeLink : undefined
-          }
+          className={({ isActive }) => (isActive ? styles.activeLink : undefined)}
           to='/news'
         >
           News
@@ -37,9 +31,7 @@ const Navbar = (props) => {
       </div>
       <div className={styles.item}>
         <NavLink
-          className={({ isActive }) =>
-            isActive ? styles.activeLink : undefined
-          }
+          className={({ isActive }) => (isActive ? styles.activeLink : undefined)}
           to='/music'
         >
           Music
@@ -48,9 +40,7 @@ const Navbar = (props) => {
       <br />
       <div className={styles.item}>
         <NavLink
-          className={({ isActive }) =>
-            isActive ? styles.activeLink : undefined
-          }
+          className={({ isActive }) => (isActive ? styles.activeLink : undefined)}
           to='/users'
         >
           Find Users
@@ -59,9 +49,7 @@ const Navbar = (props) => {
       <br />
       <div className={styles.item}>
         <NavLink
-          className={({ isActive }) =>
-            isActive ? styles.activeLink : undefined
-          }
+          className={({ isActive }) => (isActive ? styles.activeLink : undefined)}
           to='/settings'
         >
           Settings
